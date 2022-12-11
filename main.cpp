@@ -21,14 +21,16 @@ int dir = directions::right;
 
 int snakeLenght = 2;
 
-struct Snake {
+class Snake {
+public:
     int x, y;
 } snake[500];
 
 bool isAlive = true;
 bool click = true;
 
-struct Fruct {
+class Fruit {
+public:
     int x, y;
 } apple;
 
@@ -75,7 +77,8 @@ void Update() {
             isAlive = false;
         }
 }
-
+Sprite snakeHeadSprite;
+Sound appleTake;
 bool startGame() {
 
     if ((dir = directions::up)) snakeHeadSprite.setTextureRect(IntRect(64, 32, -32, -32));

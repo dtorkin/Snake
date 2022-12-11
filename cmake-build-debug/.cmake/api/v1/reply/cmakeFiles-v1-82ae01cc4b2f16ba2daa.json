@@ -785,8 +785,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/Users/dtorkin/Desktop/SnakeGame/cmake-build-debug",
-		"source" : "C:/Users/dtorkin/Desktop/SnakeGame"
+		"build" : "C:/Users/dtorkin/Desktop/snake/cmake-build-debug",
+		"source" : "C:/Users/dtorkin/Desktop/snake"
 	},
 	"version" : 
 	{

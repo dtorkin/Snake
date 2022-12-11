@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/dtorkin/Desktop/SnakeGame/cmake-build-debug"
+			"value" : "c:/Users/dtorkin/Desktop/snake/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -623,7 +623,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/dtorkin/Desktop/SnakeGame"
+			"value" : "C:/Users/dtorkin/Desktop/snake"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1243,7 +1243,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Users/dtorkin/Desktop/SnakeGame/SFML-2.5.1/lib/libFLAC.a"
+			"value" : "C:/Users/dtorkin/Desktop/snake/SFML-2.5.1/lib/libFLAC.a"
 		},
 		{
 			"name" : "FreeType_LIB",
@@ -1259,7 +1259,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Users/dtorkin/Desktop/SnakeGame/SFML-2.5.1/lib/libfreetype.a"
+			"value" : "C:/Users/dtorkin/Desktop/snake/SFML-2.5.1/lib/libfreetype.a"
 		},
 		{
 			"name" : "Ogg_LIB",
@@ -1275,7 +1275,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Users/dtorkin/Desktop/SnakeGame/SFML-2.5.1/lib/libogg.a"
+			"value" : "C:/Users/dtorkin/Desktop/snake/SFML-2.5.1/lib/libogg.a"
 		},
 		{
 			"name" : "OpenAL_LIB",
@@ -1291,7 +1291,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Users/dtorkin/Desktop/SnakeGame/SFML-2.5.1/lib/libopenal32.a"
+			"value" : "C:/Users/dtorkin/Desktop/snake/SFML-2.5.1/lib/libopenal32.a"
 		},
 		{
 			"name" : "SFML_DOC_DIR",
@@ -1315,7 +1315,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/dtorkin/Desktop/SnakeGame/cmake-build-debug"
+			"value" : "C:/Users/dtorkin/Desktop/snake/cmake-build-debug"
 		},
 		{
 			"name" : "Snake_IS_TOP_LEVEL",
@@ -1339,7 +1339,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/dtorkin/Desktop/SnakeGame"
+			"value" : "C:/Users/dtorkin/Desktop/snake"
 		},
 		{
 			"name" : "VorbisEnc_LIB",
@@ -1355,7 +1355,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Users/dtorkin/Desktop/SnakeGame/SFML-2.5.1/lib/libvorbisenc.a"
+			"value" : "C:/Users/dtorkin/Desktop/snake/SFML-2.5.1/lib/libvorbisenc.a"
 		},
 		{
 			"name" : "VorbisFile_LIB",
@@ -1371,7 +1371,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Users/dtorkin/Desktop/SnakeGame/SFML-2.5.1/lib/libvorbisfile.a"
+			"value" : "C:/Users/dtorkin/Desktop/snake/SFML-2.5.1/lib/libvorbisfile.a"
 		},
 		{
 			"name" : "Vorbis_LIB",
@@ -1387,7 +1387,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Users/dtorkin/Desktop/SnakeGame/SFML-2.5.1/lib/libvorbis.a"
+			"value" : "C:/Users/dtorkin/Desktop/snake/SFML-2.5.1/lib/libvorbis.a"
 		}
 	],
 	"kind" : "cache",

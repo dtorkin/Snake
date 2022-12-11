@@ -209,7 +209,7 @@
 				{
 					"backtrace" : 2,
 					"isSystem" : true,
-					"path" : "C:/Users/dtorkin/Desktop/SnakeGame/SFML-2.5.1/include"
+					"path" : "C:/Users/dtorkin/Desktop/snake/SFML-2.5.1/include"
 				}
 			],
 			"language" : "CXX",
