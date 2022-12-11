@@ -77,8 +77,6 @@ void Update() {
             isAlive = false;
         }
 }
-Sprite snakeHeadSprite;
-Sound appleTake;
 bool startGame() {
 
     if ((dir = directions::up)) snakeHeadSprite.setTextureRect(IntRect(64, 32, -32, -32));
