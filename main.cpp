@@ -16,17 +16,15 @@ std::ifstream is("leaders.txt");
 std::istream_iterator<double> start(is), end;
 std::vector<int> leaderboardResults(start, end);
 
-enum directions {down, up, right, left};
-int dir = directions::right;
-
-int snakeLenght = 2;
-
 class Snake {
 public:
     int x, y;
+    int lenght = 2;
+    enum directions {down, up, right, left};
+    int dir = directions::right;
+    bool isAlive = true;
 } snake[500];
 
-bool isAlive = true;
 bool click = true;
 
 class Fruit {
@@ -39,24 +37,24 @@ Sound appleTake;
 
 void Update() {
     // змеиный хвостик :3
-    for (int i = snakeLenght; i > 0; i--) {
+    for (int i = snake->lenght; i > 0; i--) {
         snake[i].x = snake[i - 1].x;
         snake[i].y = snake[i - 1].y;
     }
 
     // перемещение головы по полю
-    if (dir == directions::down) snake[0].y += 1;
-    if (dir == directions::up) snake[0].x -= 1;
-    if (dir == directions::right) snake[0].x += 1;
-    if (dir == directions::left) snake[0].y -= 1;
+    if (snake->dir == Snake::directions::down) snake[0].y += 1;
+    if (snake->dir == Snake::directions::up) snake[0].x -= 1;
+    if (snake->dir == Snake::directions::right) snake[0].x += 1;
+    if (snake->dir == Snake::directions::left) snake[0].y -= 1;
 
     // кушаем яблоко
     if ((snake[0].x == apple.x) && (snake[0].y == apple.y)) {
         appleTake.play();
-        snakeLenght++;
+        snake->lenght++;
         apple.x = rand() % N;
         apple.y = rand() % M;
-        for (int i = 0; i < snakeLenght; i++) {
+        for (int i = 0; i < snake->lenght; i++) {
             if ((snake[i].x == apple.x) && (snake[i].y == apple.y)) {
                 apple.x = rand() % N;
                 apple.y = rand() % M;
@@ -72,22 +70,21 @@ void Update() {
     if (snake[0].y < 0) snake[0].y = M - 1;
 
     // смерть если врезаешься в себя
-    for (int i = 1; i < snakeLenght; i++)
+    for (int i = 1; i < snake->lenght; i++)
         if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
-            isAlive = false;
+            snake->isAlive = false;
         }
 }
 bool startGame() {
-
-    if ((dir = directions::up)) snakeHeadSprite.setTextureRect(IntRect(64, 32, -32, -32));
-    if ((dir = directions::right)) snakeHeadSprite.setTextureRect(IntRect(32, 0, 32, 32));
-    if ((dir = directions::left)) snakeHeadSprite.setTextureRect(IntRect(32, 32, -32, -32));
-    if ((dir = directions::down)) snakeHeadSprite.setTextureRect(IntRect(0, 0, 32, 32));
+    if ((snake->dir = Snake::directions::up)) snakeHeadSprite.setTextureRect(IntRect(64, 32, -32, -32));
+    if ((snake->dir = Snake::directions::right)) snakeHeadSprite.setTextureRect(IntRect(32, 0, 32, 32));
+    if ((snake->dir = Snake::directions::left)) snakeHeadSprite.setTextureRect(IntRect(32, 32, -32, -32));
+    if ((snake->dir = Snake::directions::down)) snakeHeadSprite.setTextureRect(IntRect(0, 0, 32, 32));
 
     int playerScore = 0;
 
-    snakeLenght = 2;
-    isAlive = true;
+    snake->lenght = 2;
+    snake->isAlive = true;
     click = true;
 
     srand(time(nullptr));
@@ -142,7 +139,7 @@ bool startGame() {
 
     while (window.isOpen()) {
         float time = clock.getElapsedTime().asSeconds();
-        if (isAlive) gameTime = int(gameTimeClock.getElapsedTime().asSeconds());
+        if (snake->isAlive) gameTime = int(gameTimeClock.getElapsedTime().asSeconds());
         clock.restart();
         timer += time;
 
@@ -152,7 +149,7 @@ bool startGame() {
                 window.close();
         }
 
-        if (Keyboard::isKeyPressed(Keyboard::Escape)) { return true; }//если таб, то перезагружаем игру
+        if (Keyboard::isKeyPressed(Keyboard::Escape)) { return true; }//если Esc, то перезагружаем игру
 
         if (timer > delay) {
             timer = 0;
@@ -160,25 +157,25 @@ bool startGame() {
             Update();
         }
 
-        if (isAlive) {
+        if (snake->isAlive) {
             if (click) {
-                if ((Keyboard::isKeyPressed(Keyboard::Left) && (dir != 2))) {
-                    dir = directions::up;
+                if ((Keyboard::isKeyPressed(Keyboard::Left) && (snake->dir != 2))) {
+                    snake->dir = Snake::directions::up;
                     snakeHeadSprite.setTextureRect(IntRect(32, 0, 32, 32));
                     click = false;
                 }
-                if ((Keyboard::isKeyPressed(Keyboard::Right)) && (dir != 1)) {
-                    dir = directions::right;
+                if ((Keyboard::isKeyPressed(Keyboard::Right)) && (snake->dir != 1)) {
+                    snake->dir = Snake::directions::right;
                     snakeHeadSprite.setTextureRect(IntRect(64, 32, -32, -32));
                     click = false;
                 }
-                if ((Keyboard::isKeyPressed(Keyboard::Up)) && (dir != 0)) {
-                    dir = directions::left;
+                if ((Keyboard::isKeyPressed(Keyboard::Up)) && (snake->dir != 0)) {
+                    snake->dir = Snake::directions::left;
                     snakeHeadSprite.setTextureRect(IntRect(0, 0, 32, 32));
                     click = false;
                 }
-                if ((Keyboard::isKeyPressed(Keyboard::Down)) && (dir != 3)) {
-                    dir = directions::down;
+                if ((Keyboard::isKeyPressed(Keyboard::Down)) && (snake->dir != 3)) {
+                    snake->dir = Snake::directions::down;
                     snakeHeadSprite.setTextureRect(IntRect(32, 32, -32, -32));
                     click = false;
                 }
@@ -193,7 +190,7 @@ bool startGame() {
                 }
             }
 
-            for (int i = 0; i < snakeLenght; i++) {
+            for (int i = 0; i < snake->lenght; i++) {
                 snakeSprite.setPosition(float(snake[i].x * size), float(snake[i].y * size));
                 window.draw(snakeSprite);
                 snakeHeadSprite.setPosition(float(snake[0].x * size), float(snake[0].y * size));
@@ -210,7 +207,7 @@ bool startGame() {
             text.setPosition(6, 6);
             window.draw(text);
 
-            playerScore = snakeLenght - 2;
+            playerScore = snake->lenght - 2;
 
             std::ostringstream playerScoreString;
             playerScoreString << playerScore;
@@ -248,4 +245,3 @@ int main() {
     gameRunning();
     return 0;
 }
-
