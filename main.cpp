@@ -3,6 +3,7 @@
 #include <ctime>
 #include <fstream>
 #include <sstream>
+#include <iostream>
 #include "menu.h"
 #include "gameOver.h"
 
@@ -11,6 +12,7 @@ using namespace sf;
 const int N = 25, M = 19;
 const int size = 32;
 const int h = size * M;
+bool gameWithWalls = true;
 
 std::ifstream is("leaders.txt");
 std::istream_iterator<double> start(is), end;
@@ -18,9 +20,11 @@ std::vector<int> leaderboardResults(start, end);
 
 class Snake {
 public:
-    int x, y;
+    int x = 1, y = 2;
     int lenght = 2;
-    enum directions {down, up, right, left};
+    enum directions {
+        down, up, right, left
+    };
     int dir = directions::right;
     bool isAlive = true;
 } snake[500];
@@ -52,13 +56,23 @@ void Update() {
     if ((snake[0].x == apple.x) && (snake[0].y == apple.y)) {
         appleTake.play();
         snake->lenght++;
-        apple.x = rand() % N;
-        apple.y = rand() % M;
+
+        if (gameWithWalls) {
+            apple.x = rand() % (N - 1) + 1;
+            apple.y = rand() % (M - 1) + 1;
+        } else {
+            apple.x = rand() % N;
+            apple.y = rand() % M;
+        }
         for (int i = 0; i < snake->lenght; i++) {
             if ((snake[i].x == apple.x) && (snake[i].y == apple.y)) {
-                apple.x = rand() % N;
-                apple.y = rand() % M;
-                break;
+                if (gameWithWalls) {
+                    apple.x = rand() % (N - 1) + 1;
+                    apple.y = rand() % (M - 1) + 1;
+                } else {
+                    apple.x = rand() % N;
+                    apple.y = rand() % M;
+                }
             }
         }
     }
@@ -75,6 +89,7 @@ void Update() {
             snake->isAlive = false;
         }
 }
+
 bool startGame() {
     if ((snake->dir = Snake::directions::up)) snakeHeadSprite.setTextureRect(IntRect(64, 32, -32, -32));
     if ((snake->dir = Snake::directions::right)) snakeHeadSprite.setTextureRect(IntRect(32, 0, 32, 32));
@@ -136,6 +151,14 @@ bool startGame() {
 
     apple.x = 3;
     apple.y = 5;
+
+    std::vector<std::vector<int> > wall(M, std::vector<int>(N, 1));
+
+    for (int i = 1; i < M - 1; i++) {
+        for (int j = 1; j < N - 1; j++) {
+            wall[i][j] = 0;
+        }
+    }
 
     while (window.isOpen()) {
         float time = clock.getElapsedTime().asSeconds();
@@ -200,6 +223,16 @@ bool startGame() {
             appleSprite.setPosition(float(apple.x * size), float(apple.y * size));
             window.draw(appleSprite);
 
+            if (gameWithWalls) {
+                for (int i = 0; i < M; i++) {
+                    for (int j = 0; j < N; j++) {
+                        if (wall[i][j] == 1) {
+                            wallSprite.setPosition(float(j * size), float(i * size));
+                            window.draw(wallSprite);
+                        }
+                    }
+                }
+            }
             std::ostringstream gameTimeSeconds, gameTimeMinutes;
             gameTimeSeconds << gameTime % 60;
             gameTimeMinutes << gameTime / 60;
