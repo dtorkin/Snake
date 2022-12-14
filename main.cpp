@@ -103,6 +103,7 @@ bool startGame() {
     if ((snake->dir = Snake::directions::down)) snakeHeadSprite.setTextureRect(IntRect(0, 0, 32, 32));
 
     int playerScore = 0;
+    bool speedIncreased = false;
 
     snake->lenght = 2;
     snake->isAlive = true;
@@ -152,7 +153,7 @@ bool startGame() {
     music.setLoop(true);
 
     Clock clock;
-    float timer = 0, delay = 0.1;
+    float timer = 0, delay = 0.105;
 
     Clock gameTimeClock;
     int gameTime = 0;
@@ -211,6 +212,14 @@ bool startGame() {
                     snake->dir = Snake::directions::down;
                     snakeHeadSprite.setTextureRect(IntRect(32, 32, -32, -32));
                     click = false;
+
+                }
+                if ((playerScore % 10 == 0) && (!speedIncreased)) {
+                    speedIncreased = true;
+                    delay = delay - 0.005;
+                }
+                if ((playerScore % 10 == 1)) {
+                    speedIncreased = false;
                 }
             }
             //draw
