@@ -12,7 +12,7 @@ using namespace sf;
 const int N = 25, M = 19;
 const int size = 32;
 const int h = size * M;
-bool gameWithWalls = true;
+bool gameWithWalls;
 
 std::ifstream is("leaders.txt");
 std::istream_iterator<double> start(is), end;
@@ -112,6 +112,8 @@ bool startGame() {
 
     RenderWindow window(VideoMode(800, 608), "Snake Game!");
     menu(window, leaderboardResults);
+    std::ifstream fileMode("wallsMode.txt");
+    fileMode >> gameWithWalls;
 
     Texture grassTexture, snakeTexture, snakeHeadTexture, appleTexture, wallTexture;
     grassTexture.loadFromFile("images/grass.png");
