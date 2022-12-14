@@ -58,8 +58,8 @@ void Update() {
         snake->lenght++;
 
         if (gameWithWalls) {
-            apple.x = rand() % (N - 1) + 1;
-            apple.y = rand() % (M - 1) + 1;
+            apple.x = rand() % (N - 2) + 1;
+            apple.y = rand() % (M - 2) + 1;
         } else {
             apple.x = rand() % N;
             apple.y = rand() % M;
@@ -67,8 +67,8 @@ void Update() {
         for (int i = 0; i < snake->lenght; i++) {
             if ((snake[i].x == apple.x) && (snake[i].y == apple.y)) {
                 if (gameWithWalls) {
-                    apple.x = rand() % (N - 1) + 1;
-                    apple.y = rand() % (M - 1) + 1;
+                    apple.x = rand() % (N - 2) + 1;
+                    apple.y = rand() % (M - 2) + 1;
                 } else {
                     apple.x = rand() % N;
                     apple.y = rand() % M;
@@ -84,10 +84,16 @@ void Update() {
     if (snake[0].y < 0) snake[0].y = M - 1;
 
     // смерть если врезаешься в себя
-    for (int i = 1; i < snake->lenght; i++)
+    for (int i = 1; i < snake->lenght; i++) {
         if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
             snake->isAlive = false;
         }
+    }
+    if (gameWithWalls) { //смерть если в стену
+        if ((snake[0].x == 0) || (snake[0].y == 0) || (snake[0].x == N - 1) || (snake[0].y == M - 1)) {
+            snake->isAlive = false;
+        }
+    }
 }
 
 bool startGame() {
@@ -151,6 +157,8 @@ bool startGame() {
 
     apple.x = 3;
     apple.y = 5;
+    snake[0].x = 1;
+    snake[0].y = 2;
 
     std::vector<std::vector<int> > wall(M, std::vector<int>(N, 1));
 
