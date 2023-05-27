@@ -8,7 +8,7 @@
 #include "gameOver.h"
 
 using namespace sf;
-
+//класс игры, вектор со змейкой, передача состояния
 const int N = 25, M = 19;
 const int size = 32;
 const int h = size * M;
