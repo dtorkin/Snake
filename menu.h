@@ -7,7 +7,7 @@
 
 using namespace sf;
 
-void menu(RenderWindow &window, std::vector<int> &vect) {
+bool menu(RenderWindow &window, std::vector<int> &vect) {
     bool isMenu = true;
     int menuNum;
     bool isWallsMode;
@@ -106,7 +106,10 @@ void menu(RenderWindow &window, std::vector<int> &vect) {
         }
 
         if (Mouse::isButtonPressed(Mouse::Left)) {
-            if (menuNum == 1) isMenu = false;//если нажали первую кнопку, то выходим из меню
+            if (menuNum == 1) {
+                isMenu = false;//если нажали первую кнопку, то выходим из меню
+                return isWallsMode;
+            }
             if (menuNum == 2) {
                 chooseSound.play();
                 window.draw(lbBg);

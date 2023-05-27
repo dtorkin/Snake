@@ -112,7 +112,7 @@ bool startGame() {
     srand(time(nullptr));
 
     RenderWindow window(VideoMode(800, 608), "Snake Game!");
-    menu(window, leaderboardResults);
+    gameWithWalls = menu(window, leaderboardResults);
     std::ifstream fileMode("wallsMode.txt");
     fileMode >> gameWithWalls;
 
